@@ -19,17 +19,17 @@ class issue:
     def get_severity(self):
         #print "get_severity returning %s" % wpc.conf.issue_template[self.get_id()]['severity']
         return wpc.conf.issue_template[self.get_id()]['severity']
-    
+
     def get_confidence(self):
         #print "get_confidence returning %s" % wpc.conf.issue_template[self.get_id()]['confidence']
         return wpc.conf.issue_template[self.get_id()]['confidence']
-    
+
     def get_ease(self):
         return wpc.conf.issue_template[self.get_id()]['ease']
-    
+
     def get_impact(self):
         return wpc.conf.issue_template[self.get_id()]['impact']
-    
+
     def render_supporting_data(self, data_name):
         # TODO: Also stash raw data in the report object.  XSLTs could then present differently.
         # expect an array of issue.fileAcl type for now
@@ -189,12 +189,12 @@ class issue:
             for data in self.get_supporting_data(data_name):
                 s = data[0]
                 r = data[1]
-                etree.SubElement(d, 'data').text = " %s (%s) uses registry key %s, owned by %s" % (s.get_description(), s.get_name(), r.get_name(), r.get_sd().get_owner().get_fq_name())        
+                etree.SubElement(d, 'data').text = " %s (%s) uses registry key %s, owned by %s" % (s.get_description(), s.get_name(), r.get_name(), r.get_sd().get_owner().get_fq_name())
 
         elif data_name == 'regkey_untrusted_ownership':
             for data in self.get_supporting_data(data_name):
                 r = data[0]
-                etree.SubElement(d, 'data').text = "Registry key %s is owned by %s" % (r.get_name(), r.get_sd().get_owner().get_fq_name())        
+                etree.SubElement(d, 'data').text = "Registry key %s is owned by %s" % (r.get_name(), r.get_sd().get_owner().get_fq_name())
 
         elif data_name == 'scheduled_task_exe_perms':
             for data in self.get_supporting_data(data_name):
@@ -224,38 +224,38 @@ class issue:
             for data in self.get_supporting_data(data_name):
                 r = data[0]
                 a = data[1]
-                etree.SubElement(d, 'data').text = "Registry value %s has permissions:\n" % (r.get_name())        
+                etree.SubElement(d, 'data').text = "Registry value %s has permissions:\n" % (r.get_name())
                 etree.SubElement(d, 'data').text = "  %s\n" % (a.as_text())
 
         elif data_name == 'service_regkey':
             for data in self.get_supporting_data(data_name):
                 s = data[0]
-                etree.SubElement(d, 'data').text = "Service %s (%s) runs as %s.  Its registry key has no DACL: %s\n" % (s.get_description(), s.get_name(), s.get_run_as(), s.get_reg_key().get_name())        
+                etree.SubElement(d, 'data').text = "Service %s (%s) runs as %s.  Its registry key has no DACL: %s\n" % (s.get_description(), s.get_name(), s.get_run_as(), s.get_reg_key().get_name())
 
         elif data_name == 'service_exe_no_dacl':
             for data in self.get_supporting_data(data_name):
                 s = data[0]
-                etree.SubElement(d, 'data').text = "Service %s (%s) runs as %s.  Its executable has no DACL: %s\n" % (s.get_description(), s.get_name(), s.get_run_as(), s.get_exe_file().get_name())        
+                etree.SubElement(d, 'data').text = "Service %s (%s) runs as %s.  Its executable has no DACL: %s\n" % (s.get_description(), s.get_name(), s.get_run_as(), s.get_exe_file().get_name())
 
         elif data_name == 'service_info':
             for data in self.get_supporting_data(data_name):
                 s = data[0]
-                etree.SubElement(d, 'data').text = " %s (%s) runs as %s and has path: %s:\n" % (s.get_description(), s.get_name(), s.get_run_as(), s.get_exe_path())        
+                etree.SubElement(d, 'data').text = " %s (%s) runs as %s and has path: %s:\n" % (s.get_description(), s.get_name(), s.get_run_as(), s.get_exe_path())
 
         elif data_name == 'service':
             for data in self.get_supporting_data(data_name):
                 s = data[0]
-                etree.SubElement(d, 'data').text = " %s (%s) runs as %s:\n" % (s.get_description(), s.get_name(), s.get_run_as())        
+                etree.SubElement(d, 'data').text = " %s (%s) runs as %s:\n" % (s.get_description(), s.get_name(), s.get_run_as())
 
         elif data_name == 'service_domain_user':
             for data in self.get_supporting_data(data_name):
                 s = data[0]
-                etree.SubElement(d, 'data').text = " %s (%s) runs as %s\n" % (s.get_description(), s.get_name(), s.get_run_as())        
+                etree.SubElement(d, 'data').text = " %s (%s) runs as %s\n" % (s.get_description(), s.get_name(), s.get_run_as())
 
         elif data_name == 'service_no_exe':
             for data in self.get_supporting_data(data_name):
                 s = data[0]
-                etree.SubElement(d, 'data').text = " %s (%s) tries to run '%s' as %s\n" % (s.get_description(), s.get_name(), s.get_exe_path(), s.get_run_as())        
+                etree.SubElement(d, 'data').text = " %s (%s) tries to run '%s' as %s\n" % (s.get_description(), s.get_name(), s.get_exe_path(), s.get_run_as())
 
         elif data_name == 'service_dll':
             for data in self.get_supporting_data(data_name):
@@ -283,7 +283,7 @@ class issue:
         elif data_name == 'sectool_services':
             for data in self.get_supporting_data(data_name):
                 s = data[0]
-                etree.SubElement(d, 'data').text = " %s (%s) runs '%s' as %s\n" % (s.get_description(), s.get_name(), s.get_exe_path(), s.get_run_as()) 
+                etree.SubElement(d, 'data').text = " %s (%s) runs '%s' as %s\n" % (s.get_description(), s.get_name(), s.get_exe_path(), s.get_run_as())
 
         elif data_name == 'sectool_files':
             for data in self.get_supporting_data(data_name):
@@ -299,7 +299,7 @@ class issue:
         elif data_name == 'process_exe':
             for data in self.get_supporting_data(data_name):
                 p = data[0]
-                etree.SubElement(d, 'data').text = " Process ID %s (%s) as weak permissions.  TODO: Weak how?\n" % (p.get_pid(), p.get_exe().get_name())
+                etree.SubElement(d, 'data').text = " Process ID %s (%s) as weak permissions.  TODO: Weak how?\n" % (p.get_pid(), p.get_exe().get_name() if p.get_exe() else "")
 
         elif data_name == 'user_powerful_priv':
             for data in self.get_supporting_data(data_name):
@@ -358,7 +358,7 @@ class issue:
                     exe = p.get_exe().get_name()
                 else:
                     exe = "[unknown]"
-                etree.SubElement(d, 'data').text = " Process ID %s (%s) uses DLL %s.  DLL has weak permissions.  TODO: Weak how?\n" % (p.get_pid(), p.get_exe().get_name(), dll.get_name())
+                etree.SubElement(d, 'data').text = " Process ID %s (%s) uses DLL %s.  DLL has weak permissions.  TODO: Weak how?\n" % (p.get_pid(), p.get_exe().get_name() if p.get_exe() else "", dll.get_name())
 
         elif data_name == 'process':
             for data in self.get_supporting_data(data_name):
@@ -367,7 +367,7 @@ class issue:
                     exe = p.get_exe().get_name()
                 else:
                     exe = "[unknown]"
-                etree.SubElement(d, 'data').text = " Process ID %s (%s) running as %s\n" % (p.get_pid(), p.get_exe().get_name(), p.get_token().get_token_user().get_fq_name())
+                etree.SubElement(d, 'data').text = " Process ID %s (%s) running as %s\n" % (p.get_pid(), p.get_exe().get_name() if p.get_exe() else "", p.get_token().get_token_user().get_fq_name())
 
         elif data_name == 'process_perms':
             for data in self.get_supporting_data(data_name):
@@ -433,7 +433,7 @@ class issue:
     def as_xml(self):
         r = etree.Element('issue')
         etree.SubElement(r, 'title').text = wpc.conf.issue_template[self.get_id()]['title']
-        
+
         impact_number = None
         impact_text = "Not defined"
         confidence_number = None
@@ -441,7 +441,7 @@ class issue:
         ease_number = None
         ease_text = "Not defined"
         severity = 0
-        
+
         if wpc.conf.issue_template[self.get_id()]['impact']:
             impact_number = wpc.conf.issue_template[self.get_id()]['impact']
             impact_text = wpc.conf.rating_mappings['impact'][impact_number]
@@ -453,7 +453,7 @@ class issue:
             ease_text = wpc.conf.rating_mappings['ease'][ease_number]
         if wpc.conf.issue_template[self.get_id()]['severity']:
             severity = wpc.conf.issue_template[self.get_id()]['severity']
-            
+
         etree.SubElement(r, 'impact_number').text = str(impact_number)
         etree.SubElement(r, 'impact_text').text = impact_text
         etree.SubElement(r, 'confidence_number').text = str(confidence_number)
@@ -462,7 +462,7 @@ class issue:
         etree.SubElement(r, 'ease_text').text = ease_text
         etree.SubElement(r, 'severity').text = str(severity)
         etree.SubElement(r, 'id').text = self.get_id()
-        
+
         s = etree.SubElement(r, 'section', type = 'description')
         etree.SubElement(s, 'body').text = wpc.conf.issue_template[self.get_id()]['description']
         s.append(self.get_rendered_supporting_data('description'))
